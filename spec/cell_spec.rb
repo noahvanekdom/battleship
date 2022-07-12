@@ -19,7 +19,7 @@ describe Cell do
         cruiser = Ship.new("Cruiser", 3)
 
         expect(cell.ship).to eq(nil)
-        expect(cell.empty?).to eq(false)
+        expect(cell.empty?).to eq(true)
 
         cell.place_ship(cruiser)
 
