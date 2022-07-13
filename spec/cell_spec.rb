@@ -1,10 +1,10 @@
 require './lib/ship'
 require './lib/cell'
 
-describe Cell do 
+describe Cell do
     it 'is an instance of cell' do
         cell = Cell.new('B4')
-    
+
         expect(cell).to be_instance_of(Cell)
     end
 
@@ -14,7 +14,7 @@ describe Cell do
         expect(cell.coordinate).to eq('B4')
     end
 
-    it 'can report its contents' do 
+    it 'can report its contents' do
         cell = Cell.new('B4')
         cruiser = Ship.new("Cruiser", 3)
 
@@ -25,5 +25,19 @@ describe Cell do
 
         expect(cell.ship).to eq(cruiser)
         expect(cell.empty?).to eq(false)
+    end
+
+    it 'responds to being fired upon' do
+      cell = Cell.new("B4")
+      cruiser = Ship.new("Cruiser", 3)
+
+      cell.place_ship(cruiser)
+
+      expect(cell.fired_upon?).to eq(false)
+
+      cell.fire_upon
+
+      expect(cell.ship.health).to eq(2)
+      expect(cell.fired_upon?).to eq(true)
     end
 end
