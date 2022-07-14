@@ -24,11 +24,16 @@ class Board
     }
   end
 
-  # idea for Iteration 4 - board of any size
+  # # idea for Iteration 4 - board of any size
   # def cells
-  #For each key value pair that needs to be shoveled into the hash, the key is the cell.coordinate and the value is the new cell object Cell.new(coordinate)
+  # # For each key value pair that needs to be shoveled into the hash, the key is the cell.coordinate and the value is the new cell object Cell.new(coordinate)
   #   cells.map do |cell|
   #     @cells << @cells[coordinate] = Cell.new(coordinate)
   #   end
   # end
+
+  def valid_coordinate?(coordinate)
+    (coordinate.start_with?("A") || coordinate.start_with?("B") || coordinate.start_with?("C") || coordinate.start_with?("D")) &&
+    coordinate[1..-1].to_i.between?(1,4)
+  end
 end
