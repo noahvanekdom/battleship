@@ -35,14 +35,14 @@ describe Board do
     expect(board.valid_coordinate?("A22")).to eq(false)
   end
 
-  it 'can tell if a ship placement is valid' do 
-    board = Board.new 
+  it 'can tell if a ship placement is valid' do
+    board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     # CONTEXT: number of coordinates in the array = ship.length
     expect(board.valid_placement?(cruiser, ["A1","A2"])).to be false
     expect(board.valid_placement?(submarine, ["A1","A2","A3"])).to be false
-    require 'pry';binding.pry
     # CONTEXT: coordinates have to be consecutive
     expect(board.valid_placement?(cruiser, ["A1","A2","A4"])).to be false
     expect(board.valid_placement?(submarine, ["A1","C1"])).to be false

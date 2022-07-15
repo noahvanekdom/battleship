@@ -38,10 +38,21 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-     coordinates.count == ship.length 
-# coordinates must be consecutive (i.e.)
-#       `only the first character, or second character may change
-#       the maximum change in either character is +1
-#       
+
+    x_coords = []
+    y_coords = []
+
+    coordinates.map do |coordinate|
+        x_coords << coordinate[0].ord
+        y_coords << coordinate[1].to_i
+    end
+    # require 'pry';binding.pry
+
+    # BEGIN LOGIC
+    # coordinates.count == ship.length #size of the coordinates array is equal to the length of the ship
+    # x_coords[0] == x_coords[-1] && #the x coordinate is the same at the first and the last element of the array
+    # x_coords[-2] == x_coords[0] && #the x coordinate is the same at the first and the second to last element of the array
+    # y_coords[y_coords.size-1] == y_coords[0] + y_coords.size-1 #the last elemnt of the array is equal to the first + the length of the array
+    end
 
 end
