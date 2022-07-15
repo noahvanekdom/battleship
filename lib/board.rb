@@ -36,4 +36,12 @@ class Board
     (coordinate.start_with?("A") || coordinate.start_with?("B") || coordinate.start_with?("C") || coordinate.start_with?("D")) &&
     coordinate[1..-1].to_i.between?(1,4)
   end
+
+  def valid_placement?(ship, coordinates)
+     coordinates.count == ship.length 
+# coordinates must be consecutive (i.e.)
+#       `only the first character, or second character may change
+#       the maximum change in either character is +1
+#       
+
 end
