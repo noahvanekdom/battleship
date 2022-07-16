@@ -4,6 +4,9 @@ describe Board do
   let(:board) { Board.new }
   let(:cruiser) {Ship.new("Cruiser", 3)}
   let(:submarine) {Ship.new("Submarine", 2)}
+  let(:cell_1) {board.cells["A1"]}
+  let(:cell_2) {board.cells["A2"]}
+  let(:cell_3) {board.cells["A3"]}
 
   describe 'Board.new' do
   it 'is an instance of board' do
@@ -81,6 +84,20 @@ describe Board do
         it 'returns true' do
     expect(board.valid_placement?(submarine, ["A1","A2"])).to be true
     expect(board.valid_placement?(cruiser, ["B1","C1","D1"])).to be true
+      end
+    end
+  end
+  
+  describe 'place ship method' do
+    context 'when a ship is placed' do
+      it 'can return ship object that occupies the cell' do
+
+      board.place(cruiser, ["A1", "A2", "A3"])
+
+        expect(cell_1.ship).to eq(cruiser)
+        expect(cell_2.ship).to eq(cruiser)
+        expect(cell_3.ship).to eq(cruiser)
+        expect(cell_3.ship == cell_2.ship).to be true
       end
     end
   end
