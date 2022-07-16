@@ -39,6 +39,13 @@ class Board
 
   def valid_placement?(ship, coordinates)
 
+    coordinates.each do |coordinate|
+      if @cells[coordinate].empty?
+      else
+        return false
+      end
+    end
+
     x_coords = []
     y_coords = []
 
@@ -46,6 +53,7 @@ class Board
         x_coords << coordinate[0].ord
         y_coords << coordinate[1].to_i
       end
+
 
       if x_coords.uniq.count == 1
           y_coords == (y_coords.min..y_coords.max).to_a && y_coords.count == ship.length

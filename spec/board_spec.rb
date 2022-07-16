@@ -80,6 +80,14 @@ describe Board do
       end
     end
 
+    context 'when the cell is occupied' do
+      it 'returns false' do
+        board.place(cruiser, ["A1", "A2", "A3"])
+
+        expect(board.valid_placement?(submarine, ["A1", "B1"])).to be false
+      end
+    end
+
     context 'when the placement is valid' do
         it 'returns true' do
     expect(board.valid_placement?(submarine, ["A1","A2"])).to be true
