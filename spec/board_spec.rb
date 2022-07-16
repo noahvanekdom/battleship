@@ -87,6 +87,7 @@ describe Board do
       end
     end
   end
+  
   describe 'place ship method' do
     context 'when a ship is placed' do
       it 'can return ship object that occupies the cell' do
@@ -101,3 +102,4 @@ describe Board do
     end
   end
 end
+
