@@ -95,7 +95,7 @@ describe Board do
       end
     end
   end
-  
+
   describe 'place ship method' do
     context 'when a ship is placed' do
       it 'can return ship object that occupies the cell' do
@@ -106,6 +106,23 @@ describe Board do
         expect(cell_2.ship).to eq(cruiser)
         expect(cell_3.ship).to eq(cruiser)
         expect(cell_3.ship == cell_2.ship).to be true
+      end
+    end
+  end
+
+  describe 'render method' do
+    context 'when called' do
+      it 'returns a formatted string displaying the board' do
+        board.place(cruiser, ["A1","A2","A3"])
+        expect(board.render).to eq ("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      end
+    end
+
+
+    context 'when initially displaying the players board' do
+      it 'it returns S for the position of the ships' do
+        board.place(cruiser, ["A1","A2","A3"])
+        expect(board.render(true)).to eq ("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
       end
     end
   end
