@@ -37,7 +37,8 @@ class Board
     coordinate[1..-1].to_i.between?(1,4)
   end
 
-
+def valid_placement?(ship, coordinates)
+  
     coordinates.each do |coordinate|
       if @cells[coordinate].empty?
       else
