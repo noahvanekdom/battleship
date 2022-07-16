@@ -1,7 +1,8 @@
 require './lib/ship'
 
 class Cell
-    attr_reader :coordinate, :ship, :fired_upon
+    attr_reader :coordinate, :fired_upon
+    attr_accessor :ship
 
     def initialize(coordinate)
         @coordinate = coordinate
@@ -44,4 +45,3 @@ class Cell
         end
     end
 end
-
