@@ -39,20 +39,49 @@ class Board
 
   def valid_placement?(ship, coordinates)
 
-    x_coords = []
-    y_coords = []
+    cruiser_valid_placement = [
+    ["A1", "A2", "A3"], ["A2", "A3", "A4"],
+    ["B1", "B2", "B3"], ["B2", "B3", "B4"],
+    ["C1", "C2", "C3"], ["C2", "C3", "C4"],
+    ["D1", "D2", "D3"], ["D2", "D3", "D4"],
+    ["A1", "B1", "C1"], ["A2", "B2", "C2"],
+    ["A3", "B3", "C3"], ["A4", "B4", "C4"],
+    ["B1", "C1", "D1"], ["B2", "C2", "D2"],
+    ["B3", "C3", "D3"], ["B4", "C4", "D4"]
+    ]
 
-    coordinates.map do |coordinate|
-        x_coords << coordinate[0].ord
-        y_coords << coordinate[1].to_i
+    submarine_valid_placement = [
+      ["A1", "A2"], ["A2", "A3"], ["A3", "A4"],
+      ["B1", "B2"], ["B2", "B3"], ["B3", "B4"],
+      ["C1", "C2"], ["C2", "C3"], ["C3", "C4"],
+      ["D1", "D2"], ["D2", "D3"], ["D3", "D4"],
+      ["A1", "B1"], ["B1", "C1"], ["C1", "D1"],
+      ["A2", "B2"], ["B2", "C2"], ["C2", "D2"],
+      ["A3", "B3"], ["B3", "C3"], ["C3", "D3"],
+      ["A4", "B4"], ["B4", "C4"], ["C4", "D4"]
+    ]
+
+    if ship.length == 2
+      submarine_valid_placement.include?(coordinates)
+    elsif ship.length ==3
+      cruiser_valid_placement.include?(coordinates)
+    else
+      false
     end
-    # require 'pry';binding.pry
+    # Iteration 4 Idea
+    # x_coords = []
+    # y_coords = []
+    #
+    # coordinates.map do |coordinate|
+    #     x_coords << coordinate[0].ord
+    #     y_coords << coordinate[1].to_i
+    # end
 
     # BEGIN LOGIC
     # coordinates.count == ship.length #size of the coordinates array is equal to the length of the ship
     # x_coords[0] == x_coords[-1] && #the x coordinate is the same at the first and the last element of the array
     # x_coords[-2] == x_coords[0] && #the x coordinate is the same at the first and the second to last element of the array
     # y_coords[y_coords.size-1] == y_coords[0] + y_coords.size-1 #the last elemnt of the array is equal to the first + the length of the array
-    end
+  end
 
 end
