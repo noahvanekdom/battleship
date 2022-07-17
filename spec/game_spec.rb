@@ -4,8 +4,9 @@ require './lib/ship.rb'
 require './lib/game.rb'
 
 describe Game do
-  let(:game) { Game.new }
   describe 'game setup' do
+    game = Game.new
+    require "pry"; binding.pry
     it 'is an instance of game' do
       expect(game).to be_instance_of(Game)
     end
@@ -20,12 +21,6 @@ describe Game do
       expect(game.player_sub).to be_instance_of(Ship)
       expect(game.comp_cruiser).to be_instance_of(Ship)
       expect(game.comp_sub).to be_instance_of(Ship)
-    end
-
-    xit 'can start a game' do
-    end
-
-    xit 'has a main menu that gives player option to quit or play' do
     end
 
     xit 'has the computer place ships on computer board' do
