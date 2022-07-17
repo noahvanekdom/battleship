@@ -23,17 +23,22 @@ describe Game do
       expect(game.cpu_sub).to be_instance_of(Ship)
     end
 
-    xit 'has the computer place ships on computer board' do
+    it 'has the computer place ships on computer board' do
+      allow(game).to receive(:cpu_placement_coordinates).and_return(["A1","A2","A3"],["C2","C3"])
+      game.place_cpu_ships
+
+
+      expect(game.cpu_board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . S S . \nD . . . . \n")
     end
 
-    xit 'allows the user to enter valid sequences to place both ships' do
-    end
+    it 'allows the user to enter valid sequences to place both ships' do
+      allow(game).to receive(:get_user_coordinates).and_return(["A1","A2","A3"],["C2","C3"])
+      game.place_user_ships
 
-    xit 'handles invalid inputs' do
+
+      expect(game.player_board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . S S . \nD . . . . \n")
     end
   end
-
-
 
   describe 'end game ' do
     xit 'ends the game when all users ships have sunk' do
