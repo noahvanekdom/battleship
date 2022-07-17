@@ -32,6 +32,11 @@ class Game
 
     place_cpu_ships
     place_user_ships
+
+# until player_cruiser.sunk? && player_sub.sunk || cpu_cruiser.sunk? && cpu_sub.sunk?
+    begin_turn
+    player_shot
+
   end
 
 
@@ -49,7 +54,9 @@ class Game
   def place_cpu_ships
     @cpu_board.place(@cpu_cruiser, cpu_placement_coordinates(@cpu_cruiser, @cpu_board))
     @cpu_board.place(@cpu_sub, cpu_placement_coordinates(@cpu_sub, @cpu_board))
-    puts "I've placed my ships, now do your best to fool me -- input the coordinates for your cruiser in order"
+    puts "I have laid out my ships on the grid.\n" + "You now need to lay out your two ships.\n" +
+    "The Cruiser is three units long and the Submarine is two units long."
+    puts "Your board:\n" + @player_board.render
   end
 
   def get_user_coordinates(ship, board)
@@ -66,8 +73,33 @@ class Game
   def place_user_ships
     puts "Enter the squares for the Cruiser (3 consecutive spaces -- not diagonal!):"
     @player_board.place(@player_cruiser, get_user_coordinates(@player_cruiser, @player_board))
+    puts "Your board:\n" + @player_board.render(true)
     puts "Enter the squares for the Submarine (2 consecutive spaces -- not diagonal!):"
     @player_board.place(@player_sub, get_user_coordinates(@player_sub, @player_board))
   end
-# until player_cruiser.sunk? && player_sub.sunk || cpu_cruiser.sunk? && cpu_sub.sunk?
+
+  def begin_turn
+    puts "=============COMPUTER BOARD=============\n" +
+    @cpu_board.render
+    puts "==============YOUR BOARD==============\n" +
+    @player_board.render(true)
+  end
+
+  def player_shot
+    puts "Enter the coordinate of your shot:"
+    get_player_shot
+    @cpu_board.cells[get_player_shot].fire_upon
+  end
+
+  def get_player_shot(board = @cpu_board)
+    player_shot_coordinate = ""
+    until board.valid_coordinate?(player_shot_coordinate) do
+      player_shot_coordinate = gets.chomp.upcase.to_s
+      unless board.valid_coordinate?(player_shot_coordinate)
+        puts "Please enter valid coordinate:"
+      end
+    end
+    player_shot_coordinate
+  end
+
 end
