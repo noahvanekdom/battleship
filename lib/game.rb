@@ -33,11 +33,16 @@ class Game
     place_cpu_ships
     place_user_ships
 
-# until player_cruiser.sunk? && player_sub.sunk || cpu_cruiser.sunk? && cpu_sub.sunk?
-    begin_turn
-    player_shot
-
+    until player_cruiser.sunk? && player_sub.sunk || cpu_cruiser.sunk? && cpu_sub.sunk? do
+      begin_turn
+      player_last_shot = player_shot
+      cpu_last_shot = cpu_shot
+      shot_feedback(player_last_shot, false)
+      shot_feedback(cpu_last_shot, true)
+    end
+      end_game
   end
+
 
 
   def cpu_placement_coordinates(ship, board)
@@ -85,21 +90,60 @@ class Game
     @player_board.render(true)
   end
 
-  def player_shot
-    puts "Enter the coordinate of your shot:"
-    get_player_shot
-    @cpu_board.cells[get_player_shot].fire_upon
-  end
-
   def get_player_shot(board = @cpu_board)
     player_shot_coordinate = ""
     until board.valid_coordinate?(player_shot_coordinate) do
-      player_shot_coordinate = gets.chomp.upcase.to_s
+      player_shot_coordinate = gets.chomp.to_s.upcase
       unless board.valid_coordinate?(player_shot_coordinate)
         puts "Please enter valid coordinate:"
       end
     end
     player_shot_coordinate
   end
+
+  def player_shot
+    puts "Enter the coordinate of your shot:"
+    coordinate = @cpu_board.cells[get_player_shot]
+    coordinate.fire_upon
+    coordinate
+  end
+
+  def shot_feedback(cell, is_computer)
+    pronoun = is_computer ? "My" : "Your"
+    second_pronoun = is_computer ? "I" : "You"
+    third_pronoun = is_computer ? "your" : "their"
+    case cell.render
+    when "M"
+      puts "#{pronoun} shot on #{cell.coordinate} was a miss!"
+    when "H"
+      puts "#{pronoun} shot on #{cell.coordinate} was a hit!"
+    when "X"
+      puts "#{second_pronoun} sunk #{third_pronoun} #{cell.ship.name}"
+    end
+  end
+
+
+
+  def get_cpu_shot(board = @player_board)
+    not_fired_upon = board.cells.select { |coordinate, cell| !cell.fired_upon? }
+    not_fired_upon.keys.sample
+  end
+
+
+  def cpu_shot
+    coordinate = @player_board.cells[get_cpu_shot]
+    coordinate.fire_upon
+    coordinate
+  end
+
+  def end_game
+    if player_cruiser.sunk? && player_sub.sunk
+      puts "I won!!! Too bad for you... :("
+    else
+      puts "You beat me! Hooray!"
+    end
+    main_menu
+  end
+
 
 end
