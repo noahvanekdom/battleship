@@ -31,6 +31,7 @@ class Cell
       @fired_upon
     end
 
+
     def render(player_status = false)
         if @fired_upon && @ship != nil && ship.sunk?
             "X"
