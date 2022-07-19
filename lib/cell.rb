@@ -15,7 +15,7 @@ class Cell
     end
 
     def empty?
-       @ship == nil
+      @ship == nil  
     end
 
     def fire_upon
