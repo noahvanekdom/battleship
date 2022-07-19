@@ -33,7 +33,7 @@ class Game
     place_cpu_ships
     place_user_ships
 
-    until player_cruiser.sunk? && player_sub.sunk? || cpu_cruiser.sunk? && cpu_sub.sunk? do
+    until (player_cruiser.sunk? && player_sub.sunk? || cpu_cruiser.sunk? && cpu_sub.sunk?) do
       begin_turn
       player_last_shot = player_shot
       cpu_last_shot = cpu_shot
