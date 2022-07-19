@@ -111,14 +111,14 @@ class Game
   def shot_feedback(cell, is_computer)
     pronoun = is_computer ? "My" : "Your"
     second_pronoun = is_computer ? "I" : "You"
-    third_pronoun = is_computer ? "your" : "their"
+    third_pronoun = is_computer ? "your" : "my"
     case cell.render
     when "M"
       puts "#{pronoun} shot on #{cell.coordinate} was a miss!"
     when "H"
       puts "#{pronoun} shot on #{cell.coordinate} was a hit!"
     when "X"
-      puts "#{second_pronoun} sunk #{third_pronoun} #{cell.ship.name}"
+      puts "#{second_pronoun} sunk #{third_pronoun} #{cell.ship.name}!"
     end
   end
 
@@ -140,7 +140,7 @@ class Game
     if player_cruiser.sunk? && player_sub.sunk
       puts "I won!!! Too bad for you... :("
     else
-      puts "You beat me! Hooray!"
+      puts "**********You beat me! Hooray!**********"
     end
     main_menu
   end
