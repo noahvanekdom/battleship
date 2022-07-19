@@ -40,7 +40,9 @@ class Board
 def valid_placement?(ship, coordinates)
 
     coordinates.each do |coordinate|
-      if @cells[coordinate].empty?
+      if !valid_coordinate?(coordinate)
+        return false
+      elsif @cells[coordinate].empty?
       else
         return false
       end
