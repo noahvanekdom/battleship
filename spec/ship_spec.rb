@@ -27,6 +27,7 @@ describe Ship do
 
   it 'can be sunk' do
     cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
 
     expect(cruiser.sunk?).to eq(false)
 
@@ -42,6 +43,13 @@ describe Ship do
 
     expect(cruiser.health).to eq(0)
     expect(cruiser.sunk?).to eq(true)
+
+
+    expect(submarine.sunk?).to eq(false)
+    submarine.hit
+    expect(submarine.health).to eq(1)
+    submarine.hit
+    expect(submarine.sunk?).to eq(true)
   end
   
 end

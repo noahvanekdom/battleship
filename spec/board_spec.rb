@@ -51,9 +51,6 @@ describe Board do
   describe 'valid_ship_placement?' do
     context 'when the placement is the wrong length' do
       it 'returns false' do
-    # # board = Board.new
-    # # cruiser = Ship.new("Cruiser", 3)
-    # # submarine = Ship.new("Submarine", 2)
     expect(board.valid_placement?(cruiser, ["A1","A2"])).to be false
     expect(board.valid_placement?(submarine, ["A1","A2","A3"])).to be false
       end

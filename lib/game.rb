@@ -33,7 +33,7 @@ class Game
     place_cpu_ships
     place_user_ships
 
-    until player_cruiser.sunk? && player_sub.sunk || cpu_cruiser.sunk? && cpu_sub.sunk? do
+    until (player_cruiser.sunk? && player_sub.sunk? || cpu_cruiser.sunk? && cpu_sub.sunk?) do
       begin_turn
       player_last_shot = player_shot
       cpu_last_shot = cpu_shot
@@ -137,7 +137,7 @@ class Game
   end
 
   def end_game
-    if player_cruiser.sunk? && player_sub.sunk
+    if player_cruiser.sunk? && player_sub.sunk?
       puts "I won!!! Too bad for you... :("
     else
       puts "**********You beat me! Hooray!**********"

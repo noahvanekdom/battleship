@@ -4,8 +4,8 @@ require './lib/ship.rb'
 require './lib/game.rb'
 
 describe Game do
+  let(:game) {Game.new}
   describe 'game setup' do
-    game = Game.new
 
     it 'is an instance of game' do
       expect(game).to be_instance_of(Game)
@@ -64,16 +64,18 @@ describe Game do
   end
 
   describe 'end game ' do
-    xit 'ends the game when all users ships have sunk' do
+    it 'ends the game when all users ships have sunk and reports winner' do
+      game.player_cruiser.health =0
+      game.player_sub.health = 0
+
+      expect(game.end_game).to eq "I won!!! Too bad for you... :("
     end
 
-    xit 'ends the game when all users ships have sunk' do
-    end
+    xit 'ends the game when all users ships have sunk and reports winner' do
+      game.cpu_cruiser.health =0
+      game.cpu_sub.health = 0
 
-    xit 'reports who won' do
-    end
-
-    xit 'returns to the main menu when then game is over' do
+      expect(game.end_game).to eq "**********You beat me! Hooray!**********"
     end
   end
 
